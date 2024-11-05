@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+// Product.php model dosyası
 class Product extends Model
 {
-    use HasFactory;
-
-    protected $fillable = ['name', 'description', 'price', 'stock'];
+    protected $fillable = ['name', 'price', 'image_url', 'description']; // Açıklama ekleyin
 }
+

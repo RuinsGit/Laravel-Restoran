@@ -17,7 +17,7 @@
             <div class="col-md-4">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <div class="fotos"><img class="foto" src="{{ $product->image_url }}"></div>
+                        <div class="fotos"><img class="foto" src="{{ $product->image_url }}" alt="{{ $product->name }}"></div>
                         <h5 class="card-title">{{ $product->name }}</h5>
                         <p class="card-text">{{ $product->description }}</p>
                         <p class="card-text">Fiyat: {{ $product->price }} TL</p>
@@ -27,33 +27,45 @@
             </div>
         @endforeach
     </div>
+
+    <!-- Sepet İçeriği -->
+    <div class="mt-5" id="cart-container">
+        <h2>Sepetiniz</h2>
+        <table class="table" id="cart-items">
+            <thead>
+            <tr>
+                <th>Ürün Adı</th>
+                <th>Fiyat</th>
+                <th>Fotoğraf</th>
+                <th>İşlem</th> <!-- Silme butonu için başlık -->
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Sepet ürünleri burada yüklenecek -->
+            @foreach(session('cart', []) as $id => $product)
+                <tr>
+                    <td>{{ $product['name'] }}</td>
+                    <td>{{ $product['price'] }} TL</td>
+                    <td><img src="{{ $product['image_url'] }}" alt="{{ $product['name'] }}" width="50"></td>
+                    <td>
+                        <button class="btn btn-danger remove-from-cart" data-id="{{ $id }}">Sil</button> <!-- Sil butonu -->
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+        <button class="btn btn-success" id="confirm-cart">Sepeti Onayla ve WhatsApp'tan Gönder</button>
+    </div>
+
+    <div class="mt-3">
+        <a href="{{ route('cart.index') }}" class="btn btn-secondary">Sepeti Görüntüle</a>
+    </div>
 </div>
 
-<div class="logut">
-    <a class="logut" href="{{ route('login.form') }}">Cix</a>
+<div class="logout">
+    <a class="logout" href="{{ route('login.form') }}">Çıkış</a>
 </div>
 
-<script>
-    $(document).ready(function() {
-        // CSRF token'ını ayarla
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $(document).on('click', '.add-to-cart', function() {
-            var productId = $(this).data('id');
-            $.post('/cart/add/' + productId, function(response) {
-                alert(response.message);
-            }).fail(function(response) {
-                alert(response.responseJSON.message);
-            });
-        });
-    });
-</script>
+<script src="{{ asset('js/sebetx.js') }}"></script>
 </body>
 </html>
-
-
-
