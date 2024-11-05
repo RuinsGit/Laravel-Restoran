@@ -10,6 +10,19 @@
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 </head>
 <body>
+
+<h1>Ürünler Sayfası</h1>
+
+<!-- Kullanıcının adını göster -->
+@if(Auth::check())
+    <p>Hoş geldiniz, {{ Auth::user()->name }}!</p>
+@else
+    <p>Giriş yapmadınız.</p>
+@endif
+
+
+
+
 <div class="container mt-5">
     <h1>Ürünler</h1>
     <div class="row">

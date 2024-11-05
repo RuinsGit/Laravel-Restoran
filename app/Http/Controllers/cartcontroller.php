@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Twilio\Rest\Client;
@@ -45,8 +47,6 @@ class CartController extends Controller
     }
 
     // Sepeti onayla ve WhatsApp mesajı gönder
-
-    // Sepeti onayla ve WhatsApp mesajı gönder
     public function confirmCart()
     {
         $cart = session()->get('cart', []);
@@ -55,43 +55,50 @@ class CartController extends Controller
             return redirect()->route('cart.index')->with('error', 'Sepetiniz boş.');
         }
 
+        // Giriş yapmış kullanıcı bilgisi
+        $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('login.form')->with('error', 'Lütfen önce giriş yapınız.');
+        }
+
         // WhatsApp mesajı göndermek için Twilio yapılandırması
         $twilioSid = config('services.twilio.sid');
         $twilioToken = config('services.twilio.token');
         $twilioClient = new Client($twilioSid, $twilioToken);
 
-        $recipients = [
-            'whatsapp:+994514940398', // Alıcı numarası
-        ];
+        $recipient = 'whatsapp:+994514940398'; // Alıcı numarası
 
         try {
-            foreach ($recipients as $recipient) {
-                foreach ($cart as $product) {
-                    // Mesaj metnini oluştur
-                    $messageBody = "🛒 *Ürün Adı:* {$product['name']}\n";
-                    $messageBody .= "💲 *Fiyat:* {$product['price']} TL\n";
-                    $messageBody .= "-----------------------------------\n"; // Ürünler arasında ayrım için
+            foreach ($cart as $product) {
+                // Mesaj metnini oluştur
 
-                    // Önce resmi gönder
-                    if (!empty($product['image_url'])) {
-                        $twilioClient->messages->create(
-                            $recipient,
-                            [
-                                'from' => 'whatsapp:+14155238886', // Twilio WhatsApp numarası
-                                'mediaUrl' => [$product['image_url']], // Ürün fotoğrafını gönder
-                                'body' => $messageBody // Mesajı aynı anda ekliyoruz
-                            ]
-                        );
-                    } else {
-                        // Eğer ürün resmi yoksa, yalnızca metin mesajını gönder
-                        $twilioClient->messages->create(
-                            $recipient,
-                            [
-                                'from' => 'whatsapp:+14155238886', // Twilio WhatsApp numarası
-                                'body' => $messageBody
-                            ]
-                        );
-                    }
+
+
+                $messageBody = "🛒 *Ürün Adı:* {$product['name']}\n";
+                $messageBody .= "💲 *Fiyat:* {$product['price']} TL\n";
+
+                $messageBody .= "-----------------------------------\n"; // Ürünler arasında ayrım için
+                $messageBody .= "👤 *Kullanıcı:* {$user->name}\n"; // Kullanıcı adı ekliyoruz
+                // Önce resmi gönder
+                if (!empty($product['image_url'])) {
+                    $twilioClient->messages->create(
+                        $recipient,
+                        [
+                            'from' => 'whatsapp:+14155238886', // Twilio WhatsApp numarası
+                            'mediaUrl' => [$product['image_url']], // Ürün fotoğrafını gönder
+                            'body' => $messageBody // Mesajı aynı anda ekliyoruz
+                        ]
+                    );
+                } else {
+                    // Eğer ürün resmi yoksa, yalnızca metin mesajını gönder
+                    $twilioClient->messages->create(
+                        $recipient,
+                        [
+                            'from' => 'whatsapp:+14155238886', // Twilio WhatsApp numarası
+                            'body' => $messageBody
+                        ]
+                    );
                 }
             }
 
@@ -102,15 +109,6 @@ class CartController extends Controller
             return redirect()->route('cart.index')->with('error', 'Mesaj gönderilirken bir hata oluştu: ' . $e->getMessage());
         }
     }
-
-
-
-
-
-
-
-
-
 
     // Sepetten ürün silme
     public function remove($id)
@@ -127,10 +125,4 @@ class CartController extends Controller
 
         return response()->json(['message' => 'Ürün bulunamadı.'], 404);
     }
-
-
-
 }
-
-
-

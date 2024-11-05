@@ -1,3 +1,15 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+    outline: none;
+    text-decoration: none;
+
+}
+
+
 .fotos{
     width: 100%;
     height: 100%;
@@ -15,4 +27,109 @@
     align-items: center;
     border-radius: 8px;
     margin: auto;
+}
+
+.login{
+    width: 100%;
+    height: 100vh;
+    background-image: url("../images/back.jpg");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.form{
+    width: 350px;
+    height: 70%;
+    /*background-color: rgba(89, 133, 206, 0.58);*/
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+
+
+
+}
+
+.labels{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /*margin-top: 30px;*/
+}
+.login-style{
+    width: 100%;
+    height: 50px;
+    border-radius: 16px;
+    margin-top: 10px;
+    padding-left: 20px;
+    font-size: 16px;
+    background-color: transparent;
+    /*outline: black;*/
+    /*border: none;*/
+    outline: none;
+    border: 1px solid #fffdfd;
+}
+.login-middle{
+    width: 470px;
+    height: 530px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(108, 147, 209, 0.27);
+    flex-direction: column;
+    border-radius: 8px;
+}
+.submit{
+    width: 100%;
+    height: 50px;
+/*margin-top: 40px;*/
+    border-radius: 16px;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.submit:hover{
+    background-color: #6a6565;
+    color: white;
+}
+h2{
+    /*margin-top: 20px;*/
+}
+.reg{
+    /*margin-top: 25px;*/
+    /*margin-bottom: 20px;*/
+    font-size: 20px;
+    color: white;
+}
+
+.login-text{
+    width: 100%;
+    /*height: 40px;*/
+    /*background-color: deeppink;*/
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: white;
+}
+.login-style::placeholder{
+    font-size: 16px;
+    color: white;
+
+}
+.links{
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 600;
+    transition: ease-in-out 0.3s;
+}
+.links:hover{
+    color: #716b6b;
+    transition: ease-in-out 0.3s;
 }

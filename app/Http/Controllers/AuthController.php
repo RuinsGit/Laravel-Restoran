@@ -31,7 +31,7 @@ class AuthController extends Controller
 
         Auth::login($user); // Kullanıcıyı giriş yaptır
 
-        return redirect()->route('products'); // Ürünler sayfasına yönlendir
+        return redirect()->route('products')->with('success', 'Hoş geldiniz, ' . $user->name . '!'); // Ürünler sayfasına yönlendir
     }
 
     // Giriş ekranını göster
@@ -46,7 +46,8 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('products'); // Ürünler sayfasına yönlendir
+            $user = Auth::user(); // Giriş yapan kullanıcı bilgisi
+            return redirect()->route('products')->with('success', 'Hoş geldiniz, ' . $user->name . '!'); // Ürünler sayfasına yönlendir
         }
 
         return redirect()->back()->withErrors([
@@ -58,8 +59,6 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout(); // Kullanıcıyı çıkış yaptır
-        return redirect()->route('login.form'); // Giriş sayfasına yönlendir
+        return redirect()->route('login.form')->with('success', 'Başarıyla çıkış yaptınız.'); // Giriş sayfasına yönlendir
     }
 }
-
-
