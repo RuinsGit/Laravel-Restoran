@@ -61,3 +61,64 @@ $(document).ready(function() {
     // Sayfa yüklendiğinde sepet içeriğini getir
     loadCartItems();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+let currentIndex = 0; // Başlangıçta gösterilecek ürünün indeksi
+const slides = document.querySelectorAll('.product-slide'); // Tüm ürünleri seç
+const totalSlides = slides.length;
+
+// Ürünleri karıştırma fonksiyonu
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // Değiştir
+    }
+    return array;
+}
+
+// Ürünleri karıştır
+const shuffledSlides = shuffleArray(Array.from(slides));
+
+// İlk ürünü göster
+shuffledSlides[currentIndex].style.display = 'block';
+
+function showNextSlide() {
+    // Mevcut ürünü gizle
+    shuffledSlides[currentIndex].style.display = 'none';
+
+    // Sonraki ürünün indeksini hesapla
+    currentIndex = (currentIndex + 1) % totalSlides; // Dolaşan döngü
+
+    // Yeni ürünü göster
+    shuffledSlides[currentIndex].style.display = 'block';
+}
+
+// Her 3 saniyede bir slide değiştir
+setInterval(showNextSlide, 3000);
+
+
+
+
+// Header'a kaydırma ile renk değiştirme işlevi
+window.addEventListener("scroll", function() {
+    const header = document.getElementById("header");
+    if (window.scrollY > 50) {  // Belirli bir kaydırma mesafesi
+        header.classList.add("kaydirildi");
+    } else {
+        header.classList.remove("kaydirildi");
+    }
+});
+
+
+

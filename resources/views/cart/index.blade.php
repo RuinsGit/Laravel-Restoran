@@ -21,10 +21,11 @@
                 <th>Ürün Adı</th>
                 <th>Açıklama</th>
                 <th>Fiyat</th>
+                <th>İşlem</th>
             </tr>
             </thead>
             <tbody>
-            @foreach(session()->get('cart') as $product)
+            @foreach(session()->get('cart',[ ]) as $id => $product)
                 <tr>
                     <td>
                         <img src="{{ $product['image_url'] }}" alt="{{ $product['name'] }}" width="50">
@@ -32,6 +33,14 @@
                     <td>{{ $product['name'] }}</td>
                     <td>{{ $product['description'] ?? 'Açıklama yok' }}</td> <!-- Açıklama kontrolü -->
                     <td>{{ $product['price'] }} TL</td>
+
+
+
+                    <td>
+                        <button class="btn btn-danger remove-from-cart" data-id="{{ $id }}">Sil</button> <!-- Sil butonu -->
+                    </td>
+
+
                 </tr>
             @endforeach
             </tbody>
@@ -40,7 +49,12 @@
             @csrf
             <button type="submit" class="btn btn-success">Sepeti Onayla</button>
         </form>
+        <div ><a  href="{{ route('products') }}">Çıkış</a></div>
     @else
         <p>Sepetiniz boş.</p>
+        <div ><a  href="{{ route('products') }}">Çıkış</a></div>
     @endif
+
+
+
 @endsection

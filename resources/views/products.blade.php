@@ -11,74 +11,125 @@
 </head>
 <body>
 
-<h1>Ürünler Sayfası</h1>
-
-<!-- Kullanıcının adını göster -->
-@if(Auth::check())
-    <p>Hoş geldiniz, {{ Auth::user()->name }}!</p>
-@else
-    <p>Giriş yapmadınız.</p>
-@endif
 
 
+<header id="header">
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Login</a></li>
+            <li ><a class="sepet" href="{{ route('cart.index') }}">Sepetiniz</a></li>
+            <li ><a  href="{{ route('login.form') }}">Çıkış</a></li>
 
 
-<div class="container mt-5">
-    <h1>Ürünler</h1>
-    <div class="row">
-        @foreach ($products as $product)
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="fotos"><img class="foto" src="{{ $product->image_url }}" alt="{{ $product->name }}"></div>
-                        <h5 class="card-title">{{ $product->name }}</h5>
-                        <p class="card-text">{{ $product->description }}</p>
-                        <p class="card-text">Fiyat: {{ $product->price }} TL</p>
-                        <button class="btn btn-primary add-to-cart" data-id="{{ $product->id }}">Sepete Ekle</button>
+            <li class="li-text"> @if(Auth::check())
+
+                    <div class="text1"> Hoş geldiniz,</div>
+
+                    <div class="logined-main"> {{ Auth::user()->name }}!
+
                     </div>
-                </div>
+                @else
+                    <p class="logined-text">Giriş yapmadınız.</p>
+                @endif</li>
+
+
+        </ul>
+    </nav>
+</header>
+
+
+
+
+<div class="icerik">
+
+
+    <div class="urunler">
+        <h2>Ürünler</h2>
+        <div class="urun-listesi">
+
+
+
+
+            <div class="row " >
+                @foreach ($products as $product)
+                    <div class="col-md-4" >
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="fotos"><img class="foto" src="{{ $product->image_url }}" alt="{{ $product->name }}"></div>
+                                <h5 class="card-title">{{ $product->name }}</h5>
+                                <p class="card-text">{{ $product->description }}</p>
+                                <p class="card-text">Fiyat: {{ $product->price }} TL</p>
+                                <button class="btn btn-primary add-to-cart" data-id="{{ $product->id }}">Sepete Ekle</button>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-        @endforeach
+
+
+
+
+        </div>
+    </div>
+    <div class="slider">
+        <div class="kaydirma-alani">
+            <div class="row urun-karti" >
+                @foreach ($products as $product)
+                    <div class="col-md-12 product-slide" style="display: none;"> <!-- Tüm ürünleri gizli tut -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="fotos"><img class="foto" src="{{ $product->image_url }}" alt="{{ $product->name }}"></div>
+                                <h5 class="card-title">{{ $product->name }}</h5>
+                                <p class="card-text">{{ $product->description }}</p>
+                                <p class="card-text">Fiyat: {{ $product->price }} TL</p>
+                                <button class="btn btn-primary add-to-cart" data-id="{{ $product->id }}">Sepete Ekle</button>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 
-    <!-- Sepet İçeriği -->
-    <div class="mt-5" id="cart-container">
-        <h2>Sepetiniz</h2>
-        <table class="table" id="cart-items">
-            <thead>
-            <tr>
-                <th>Ürün Adı</th>
-                <th>Fiyat</th>
-                <th>Fotoğraf</th>
-                <th>İşlem</th> <!-- Silme butonu için başlık -->
-            </tr>
-            </thead>
-            <tbody>
-            <!-- Sepet ürünleri burada yüklenecek -->
-            @foreach(session('cart', []) as $id => $product)
-                <tr>
-                    <td>{{ $product['name'] }}</td>
-                    <td>{{ $product['price'] }} TL</td>
-                    <td><img src="{{ $product['image_url'] }}" alt="{{ $product['name'] }}" width="50"></td>
-                    <td>
-                        <button class="btn btn-danger remove-from-cart" data-id="{{ $id }}">Sil</button> <!-- Sil butonu -->
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-        <button class="btn btn-success" id="confirm-cart">Sepeti Onayla ve WhatsApp'tan Gönder</button>
-    </div>
-
-    <div class="mt-3">
-        <a href="{{ route('cart.index') }}" class="btn btn-secondary">Sepeti Görüntüle</a>
-    </div>
 </div>
 
-<div class="logout">
-    <a class="logout" href="{{ route('login.form') }}">Çıkış</a>
-</div>
+
+{{--<div class="mt-3">--}}
+{{--    <a href="{{ route('cart.index') }}" class="btn btn-secondary">Sepeti Görüntüle</a>--}}
+{{--</div>--}}
+{{--</div>--}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script src="{{ asset('js/sebetx.js') }}"></script>
 </body>
 </html>
+
+
+
+
+
+{{--<div class="slider">--}}
+{{--    <div class="slides">--}}
+{{--        <img src="{{'../images/back.jpg'}}" alt="Slide 1" class="active">--}}
+{{--        <img src="{{'../images/back.jpg'}}" alt="Slide 2">--}}
+{{--        <img src="{{'../images/back.jpg'}}" alt="Slide 3">--}}
+{{--    </div>--}}
+{{--</div>--}}
+{{--</div>--}}
