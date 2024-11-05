@@ -159,6 +159,9 @@ h2{
 body {
     background-color: #f3f4f6;
     color: #333;
+    background-image: url("../images/back.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 header {
@@ -212,7 +215,7 @@ nav ul li a:hover {
 
 .urunler {
     width: 75%;
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.34);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -233,10 +236,10 @@ nav ul li a:hover {
 .urun-karti {
     height: max-content;
     width: max-content;
-    background: #f1f1f1;
+    /*background: #f1f1f1;*/
     /*padding: 15px;*/
     border-radius: 5px;
-    border: 1px solid #ddd;
+    /*border: 1px solid #ddd;*/
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -358,4 +361,29 @@ header.kaydirildi {
     justify-content: center;
     align-items: center;
     font-size: 17px;
+}
+.slider-bars{
+    width: 330px;
+    height: 940px;
+    /*background-color: #4a5568;*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.28);
+}
+
+.look-fast{
+    width: 100px;
+    height: 56px;
+    font-size: 22px;
+    color: white;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.urun-body{
+    background-color: rgba(65, 80, 244, 0.57);!important;
 }
