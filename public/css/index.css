@@ -371,7 +371,7 @@ header.kaydirildi {
     align-items: center;
     flex-direction: column;
     border-radius: 8px;
-    background: rgba(0, 0, 0, 0.28);
+    background: rgba(0, 0, 0, 0.09);
 }
 
 .look-fast{
@@ -385,5 +385,13 @@ header.kaydirildi {
     align-items: center;
 }
 .urun-body{
-    background-color: rgba(65, 80, 244, 0.57);!important;
+    background-color: rgba(244, 195, 19, 0.57);!important;
+}
+
+.urun-slide{
+    background-color: rgba(35, 35, 33, 0.57);!important;
+}
+
+.text2{
+    color: white;
 }

@@ -84,12 +84,12 @@
             <div class="row urun-karti" >
                 @foreach ($products as $product)
                     <div class="col-md-12 product-slide" style="display: none;"> <!-- Tüm ürünleri gizli tut -->
-                        <div class="card mb-4">
+                        <div class="card mb-4 urun-slide">
                             <div class="card-body">
                                 <div class="fotos"><img class="foto" src="{{ $product->image_url }}" alt="{{ $product->name }}"></div>
-                                <h5 class="card-title">{{ $product->name }}</h5>
-                                <p class="card-text">{{ $product->description }}</p>
-                                <p class="card-text">Fiyat: {{ $product->price }} TL</p>
+                                <h5  class="card-title text2">{{ $product->name }}</h5>
+                                <p class="card-text text2">{{ $product->description }}</p>
+                                <p class="card-text text2">Fiyat: {{ $product->price }} TL</p>
                                 <button class="btn btn-primary add-to-cart" data-id="{{ $product->id }}">Sepete Ekle</button>
                             </div>
                         </div>
@@ -107,12 +107,12 @@
                 <div class="row urun-karti" >
                     @foreach ($products as $product)
                         <div class="col-md-12 product-slide" style="display: none;"> <!-- Tüm ürünleri gizli tut -->
-                            <div class="card mb-4">
+                            <div class="card mb-4 urun-slide">
                                 <div class="card-body">
                                     <div class="fotos"><img class="foto" src="{{ $product->image_url }}" alt="{{ $product->name }}"></div>
-                                    <h5 class="card-title">{{ $product->name }}</h5>
-                                    <p class="card-text">{{ $product->description }}</p>
-                                    <p class="card-text">Fiyat: {{ $product->price }} TL</p>
+                                    <h5 class="card-title text2">{{ $product->name }}</h5>
+                                    <p class="card-text text2">{{ $product->description }}</p>
+                                    <p class="card-text text2">Fiyat: {{ $product->price }} TL</p>
                                     <button class="btn btn-primary add-to-cart" data-id="{{ $product->id }}">Sepete Ekle</button>
                                 </div>
                             </div>
